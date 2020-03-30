@@ -41,25 +41,51 @@ namespace SimplexMethod
         {
             this.SimplexMatrixes.Clear();
 
-            double[,] data = {
-                {cell(0,1), cell(0,2), cell(0,3), cell(0,4), 1, 0, 0, 0, 290 },
-                {cell(1,1), cell(1,2), cell(1,3), cell(1,4), 0, 1, 0, 0, 150 },
-                {cell(2,1), cell(2,2), cell(2,3), cell(2,4), 0, 0, 1, 0, 50 },
-                {cell(3,1), cell(3,2), cell(3,3), cell(3,4), 0, 0, 0, 1, 1280 }
-            };
+            List<List<object>> data = new List<List<object>>() /*{
+                new List<object>() {cell(0,1), cell(0,2), cell(0,3), cell(0,4) },
+                new List<object>() {cell(1,1), cell(1,2), cell(1,3), cell(1,4) },
+                new List<object>() {cell(2,1), cell(2,2), cell(2,3), cell(2,4) },
+                new List<object>() {cell(3,1), cell(3,2), cell(3,3), cell(3,4) },
+                new List<object>() {cell(4,1), cell(4,2), cell(4,3), cell(4,4) }
+            }*/;
 
-            RouteAlgorythms simplex = new RouteAlgorythms(data, new double[]{0, 14, 12, 5, 6 });
-            simplex.ProcessMatrix(4, 4);            
+            object[] req = new object[inputData[0].GetUpperBound(0)];
 
-            foreach(double[,] matrix in simplex.Steps)
+            object[] stocks = new object[inputData.Count - 1];
+
+            for (int i = 0; i < inputData.Count - 1; i++)
             {
-                var table = DrawSimplexTable(matrix, 4, 4);
-                this.SimplexMatrixes.Add(table);
+                int tail = inputData[i].GetUpperBound(0);
+                data.Add(new List<object>());
+                for (int j = 0; j < tail; j++)
+                {
+                    data[i].Add(cell(i, j + 1));
+                }
+                stocks[i] = cell(i, tail);
             }
 
-            AnswerLabel.Text = "Ответ: ";
-            AnswerLabel.Text += simplex.Result.ToString();
-            OptimumPlanLabel.Text = simplex.Plan;
+            for (int i = 0; i < inputData[0].GetUpperBound(0) - 1; i++)
+            {
+                req[i] = cell(inputData.Count - 1, i + 1);
+            }
+
+            NorthWest nw = new NorthWest(data, req, stocks);
+
+
+
+
+
+
+
+            //foreach(double[,] matrix in simplex.Steps)
+            //{
+            //    var table = DrawSimplexTable(matrix, 4, 4);
+            //    this.SimplexMatrixes.Add(table);
+            //}
+
+            //AnswerLabel.Text = "Ответ: ";
+            //AnswerLabel.Text += simplex.Result.ToString();
+            //OptimumPlanLabel.Text = simplex.Plan;
             setVisibility(true);
         }
 

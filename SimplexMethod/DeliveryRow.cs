@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace SimplexMethod
 {
-    public class DeliveryRow<T> 
+    public class DeliveryRow
     {
 
         /// <summary>
         /// Представляет строку в транспортной таблице 
         /// <summary>
         
-        private DeliveryCell<T>[] _cells;
+        private DeliveryCell<object>[] _cells;
 
-        public DeliveryCell<T>[] Cells
+        public DeliveryCell<object>[] Cells
         {
             get
             {
@@ -27,25 +27,35 @@ namespace SimplexMethod
         {
             get
             {
-                return _cells.GetUpperBound(0);
+                return _cells.GetUpperBound(0) + 1;
             }
         }
 
-        public DeliveryRow(IEnumerable<T> values)
+        public object Stock
         {
-            List<T> temp = new List<T>();
+            /// <summary>
+            /// Остаток на складе 
+            /// <summary>
+            
+            get;
+            set;
+        }
 
-            foreach(T v in values)
+        public DeliveryRow(IEnumerable<object> values)
+        {
+            List<object> temp = new List<object>();
+
+            foreach(object v in values)
             {
                 temp.Add(v);
             }
             int capacity = temp.Count;
 
-            _cells = new DeliveryCell<T>[capacity];
+            _cells = new DeliveryCell<object>[capacity];
 
             for(int i = 0; i < capacity; i++)
             {
-                _cells[i] = new DeliveryCell<T>(temp[i]);
+                _cells[i] = new DeliveryCell<object>(temp[i]);
             }
         }
     }

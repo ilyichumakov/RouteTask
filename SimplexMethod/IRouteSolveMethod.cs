@@ -3,12 +3,26 @@ using System.Collections.Generic;
 
 namespace SimplexMethod
 {
-    public interface IRouteSolveMethod<T>
+    public interface IRouteSolveMethod
     {
-        T Basis { get; }
+        object BasisResult { get; }
 
         string PrintBasis();
 
+        DeliveryRow[] Rows
+        {
+            get;
+        }
 
+        DeliveryRow[] Basis
+        {
+            get;
+        }
+
+        object[] Clients
+        {
+            get;
+            set;
+        }
     }
 }

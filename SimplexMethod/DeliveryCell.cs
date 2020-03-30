@@ -22,6 +22,11 @@ namespace SimplexMethod
             set;
         }
 
+        public T Price
+        {
+            get;            
+        }
+
         public T Value
         {
             get;
@@ -30,8 +35,8 @@ namespace SimplexMethod
 
         public DeliveryCell(T val)
         {
-            Value = val;
-            Visited = false;
+            Price = val;
+            Visited = false;            
         }
     }
 }
