@@ -54,7 +54,9 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="IRouteSolveMethod.cs" />
+    <Compile Include="AbstractSolver.cs" />
     <Compile Include="MathExtend.cs" />
+    <Compile Include="LowCost.cs" />
     <Compile Include="NorthWest.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

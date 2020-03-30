@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace SimplexMethod
 {
-    public class NorthWest : AbstractSolver
+    public class LowCost : AbstractSolver
     {
-        private DeliveryRow[] _rows;      
+        private DeliveryRow[] _rows;
 
-        public NorthWest(List<List<object>> values, object[] requests, object[] stocks) : base(values, requests, stocks)
+        public LowCost(List<List<object>> values, object[] requests, object[] stocks) : base(values, requests, stocks)
         {
 
         }
