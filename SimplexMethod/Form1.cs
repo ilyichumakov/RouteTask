@@ -49,22 +49,22 @@ namespace SimplexMethod
                 new List<object>() {cell(4,1), cell(4,2), cell(4,3), cell(4,4) }
             }*/;
 
-            object[] req = new object[inputData[0].GetUpperBound(0)];
+            object[] req = new object[inputData.Last().GetUpperBound(0)];
 
             object[] stocks = new object[inputData.Count - 1];
 
             for (int i = 0; i < inputData.Count - 1; i++)
             {
-                int tail = inputData[i].GetUpperBound(0);
+                int tail = inputData[i].GetUpperBound(0) - 1;
                 data.Add(new List<object>());
                 for (int j = 0; j < tail; j++)
                 {
                     data[i].Add(cell(i, j + 1));
                 }
-                stocks[i] = cell(i, tail);
+                stocks[i] = cell(i, tail + 1);
             }
 
-            for (int i = 0; i < inputData[0].GetUpperBound(0) - 1; i++)
+            for (int i = 0; i < inputData.Last().GetUpperBound(0); i++)
             {
                 req[i] = cell(inputData.Count - 1, i + 1);
             }

@@ -32,15 +32,22 @@ namespace SimplexMethod
         {
             List<object> temp = new List<object>();
             _rows = new DeliveryRow[values.Count];
-            Clients = new object[values.Count];
+            Clients = new object[requests.GetUpperBound(0) + 1];
 
             int i = 0;
 
             foreach (List<object> row in values)
             {
                 _rows[i] = new DeliveryRow(row);
-                _rows[i].Stock = stocks[i];
-                Clients[i] = requests[i];
+                _rows[i].Stock = stocks[i];                
+                i++;
+            }
+
+            i = 0;
+
+            foreach (object r in requests)
+            {
+                Clients[i] = r;
                 i++;
             }
 
@@ -54,15 +61,29 @@ namespace SimplexMethod
 
             foreach(object request in Clients)
             {
-                _rows[row].Cells[col].Value = request;                
+                //_rows[row].Cells[col].Value = request;                
+                double target = (double)request;
 
-                while((double)_rows[row].Stock < (double)request) // if Stock < request
+                while (target > 0) 
                 {
-                    _rows[row].Cells[col].Value = _rows[row].Stock;
-                    _rows[row].Stock = ((double)_rows[row].Stock - (double)(object)_rows[row].Cells[col].Value);
-                    row++;
+                    if((double)_rows[row].Stock >= target)
+                    {
+                        _rows[row].Cells[col].Value = target;
+                        _rows[row].Cells[col].Visited = true;
+                        _rows[row].Stock = (double)_rows[row].Stock - target;
+                        target = 0;
+                    }
+                    else
+                    {
+                        _rows[row].Cells[col].Value = (double)_rows[row].Cells[col].Value + (double)_rows[row].Stock;
+                        _rows[row].Cells[col].Visited = true;
+                        target -= (double)_rows[row].Stock;
+                        _rows[row].Stock = 0;
+                        row++;
+                    }                    
                 }
-                                
+
+                col++;
             }
         }
 

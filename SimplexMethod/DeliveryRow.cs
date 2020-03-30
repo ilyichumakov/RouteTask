@@ -56,6 +56,7 @@ namespace SimplexMethod
             for(int i = 0; i < capacity; i++)
             {
                 _cells[i] = new DeliveryCell<object>(temp[i]);
+                _cells[i].Value = 0.0;
             }
         }
     }
