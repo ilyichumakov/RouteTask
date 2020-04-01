@@ -89,6 +89,45 @@ namespace SimplexMethod
         {
             throw new NotImplementedException();
         }
+                
+        protected void markColumn(int index)
+        {
+            int i = 0;
+            foreach (DeliveryRow row in _rows)
+            {
+                int j = 0;
+                foreach (DeliveryCell cell in row.Cells)
+                {
+                    if (j == index)
+                        _rows[i].Cells[j].Visited = true;
+                    j++;
+                }
+                i++;
+            }
+        }
+
+        protected void markRow(int index)
+        {
+            int j = 0;
+            foreach (DeliveryCell cell in _rows[index].Cells)
+            {
+                _rows[index].Cells[j].Visited = true;
+                j++;
+            }
+        }
+
+        protected bool isFinished()
+        {
+            foreach (double request in Clients)
+            {
+                if (request > 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
 
     }
 }

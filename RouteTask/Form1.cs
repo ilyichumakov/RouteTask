@@ -71,7 +71,7 @@ namespace SimplexMethod
 
             NorthWest nw = new NorthWest(data, req, stocks);
             LowCost lc = new LowCost(data, req, stocks);
-
+            Vogel FliegtNachSud = new Vogel(data, req, stocks);
 
 
 
