@@ -8,6 +8,14 @@ namespace SimplexMethod
 {
     public class NorthWest : AbstractSolver
     {
+        public override string Title
+        {
+            get
+            {
+                return "Метод Северо-Западного угла";
+            }
+        }
+
         public NorthWest(List<List<object>> values, object[] requests, object[] stocks) : base(values, requests, stocks)
         {
 

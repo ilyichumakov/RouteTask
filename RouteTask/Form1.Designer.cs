@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             this.dataTable = new System.Windows.Forms.DataGridView();
+            this.Product = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Bread1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Bread2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Bread3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Bread4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -40,13 +46,6 @@
             this.prevMatrix = new System.Windows.Forms.Label();
             this.LabelState = new System.Windows.Forms.Label();
             this.AnswerLabel = new System.Windows.Forms.Label();
-            this.OptimumPlanLabel = new System.Windows.Forms.Label();
-            this.Product = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Bread1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Bread2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Bread3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Bread4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -66,6 +65,39 @@
             this.dataTable.Name = "dataTable";
             this.dataTable.Size = new System.Drawing.Size(594, 228);
             this.dataTable.TabIndex = 0;
+            // 
+            // Product
+            // 
+            this.Product.HeaderText = "Поставщик";
+            this.Product.Name = "Product";
+            this.Product.ReadOnly = true;
+            this.Product.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Product.Width = 150;
+            // 
+            // Bread1
+            // 
+            this.Bread1.HeaderText = "В1";
+            this.Bread1.Name = "Bread1";
+            // 
+            // Bread2
+            // 
+            this.Bread2.HeaderText = "В2";
+            this.Bread2.Name = "Bread2";
+            // 
+            // Bread3
+            // 
+            this.Bread3.HeaderText = "В3";
+            this.Bread3.Name = "Bread3";
+            // 
+            // Bread4
+            // 
+            this.Bread4.HeaderText = "В4";
+            this.Bread4.Name = "Bread4";
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Запас";
+            this.Column1.Name = "Column1";
             // 
             // button1
             // 
@@ -128,7 +160,7 @@
             this.ProcessDataMode.CheckOnClick = true;
             this.ProcessDataMode.Name = "ProcessDataMode";
             this.ProcessDataMode.Size = new System.Drawing.Size(173, 22);
-            this.ProcessDataMode.Text = "Шаги";
+            this.ProcessDataMode.Text = "Методы решения";
             this.ProcessDataMode.Click += new System.EventHandler(this.ProcessDataMode_Click);
             // 
             // dgvContainer
@@ -178,9 +210,9 @@
             this.LabelState.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LabelState.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.LabelState.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LabelState.Location = new System.Drawing.Point(394, 24);
+            this.LabelState.Location = new System.Drawing.Point(244, 24);
             this.LabelState.Name = "LabelState";
-            this.LabelState.Size = new System.Drawing.Size(170, 29);
+            this.LabelState.Size = new System.Drawing.Size(513, 29);
             this.LabelState.TabIndex = 2;
             this.LabelState.Text = "0";
             this.LabelState.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -203,61 +235,11 @@
             this.AnswerLabel.Visible = false;
             this.AnswerLabel.Click += new System.EventHandler(this.prevMatrix_Click);
             // 
-            // OptimumPlanLabel
-            // 
-            this.OptimumPlanLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.OptimumPlanLabel.AutoSize = true;
-            this.OptimumPlanLabel.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.OptimumPlanLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.OptimumPlanLabel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.OptimumPlanLabel.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.OptimumPlanLabel.Location = new System.Drawing.Point(389, 426);
-            this.OptimumPlanLabel.Name = "OptimumPlanLabel";
-            this.OptimumPlanLabel.Size = new System.Drawing.Size(2, 21);
-            this.OptimumPlanLabel.TabIndex = 2;
-            this.OptimumPlanLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.OptimumPlanLabel.Visible = false;
-            this.OptimumPlanLabel.Click += new System.EventHandler(this.prevMatrix_Click);
-            // 
-            // Product
-            // 
-            this.Product.HeaderText = "Поставщик";
-            this.Product.Name = "Product";
-            this.Product.ReadOnly = true;
-            this.Product.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Product.Width = 150;
-            // 
-            // Bread1
-            // 
-            this.Bread1.HeaderText = "В1";
-            this.Bread1.Name = "Bread1";
-            // 
-            // Bread2
-            // 
-            this.Bread2.HeaderText = "В2";
-            this.Bread2.Name = "Bread2";
-            // 
-            // Bread3
-            // 
-            this.Bread3.HeaderText = "В3";
-            this.Bread3.Name = "Bread3";
-            // 
-            // Bread4
-            // 
-            this.Bread4.HeaderText = "В4";
-            this.Bread4.Name = "Bread4";
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Запас";
-            this.Column1.Name = "Column1";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(933, 562);
-            this.Controls.Add(this.OptimumPlanLabel);
             this.Controls.Add(this.AnswerLabel);
             this.Controls.Add(this.LabelState);
             this.Controls.Add(this.prevMatrix);
@@ -295,7 +277,6 @@
         private System.Windows.Forms.Label prevMatrix;
         private System.Windows.Forms.Label LabelState;
         private System.Windows.Forms.Label AnswerLabel;
-        private System.Windows.Forms.Label OptimumPlanLabel;
         private System.Windows.Forms.DataGridViewTextBoxColumn Product;
         private System.Windows.Forms.DataGridViewTextBoxColumn Bread1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Bread2;

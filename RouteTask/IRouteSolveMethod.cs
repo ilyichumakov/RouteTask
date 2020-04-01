@@ -5,6 +5,7 @@ namespace SimplexMethod
 {
     public interface IRouteSolveMethod
     {
+        string Title { get; }
         object BasisResult { get; }
 
         string PrintBasis();

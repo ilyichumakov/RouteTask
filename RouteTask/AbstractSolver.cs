@@ -10,6 +10,11 @@ namespace SimplexMethod
     {
         protected DeliveryRow[] _rows;
 
+        public virtual string Title
+        {
+            get { return "Title"; }
+        }
+
         public double[] Clients
         {
             /// <summary>

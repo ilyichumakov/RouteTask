@@ -8,6 +8,14 @@ namespace SimplexMethod
 {
     public class LowCost : AbstractSolver
     {
+        public override string Title
+        {
+            get
+            {
+                return "Метод наименьшей стоимости";
+            }
+        }
+
         public LowCost(List<List<object>> values, object[] requests, object[] stocks) : base(values, requests, stocks)
         {
 

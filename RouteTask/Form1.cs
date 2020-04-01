@@ -19,6 +19,7 @@ namespace SimplexMethod
 
         private List<DataGridView> SimplexMatrixes;
         private List<object[]> inputData;
+        protected List<IRouteSolveMethod> methods;
         int state;
 
         private void Form1_Load(object sender, EventArgs e)
@@ -33,6 +34,7 @@ namespace SimplexMethod
             inputData.Add(new object[] { "Потребность", "900", "700", "800", "200" });
 
             SimplexMatrixes = new List<DataGridView>();
+            methods = new List<IRouteSolveMethod>();
 
             DrawInitial();
         }
@@ -41,13 +43,7 @@ namespace SimplexMethod
         {
             this.SimplexMatrixes.Clear();
 
-            List<List<object>> data = new List<List<object>>() /*{
-                new List<object>() {cell(0,1), cell(0,2), cell(0,3), cell(0,4) },
-                new List<object>() {cell(1,1), cell(1,2), cell(1,3), cell(1,4) },
-                new List<object>() {cell(2,1), cell(2,2), cell(2,3), cell(2,4) },
-                new List<object>() {cell(3,1), cell(3,2), cell(3,3), cell(3,4) },
-                new List<object>() {cell(4,1), cell(4,2), cell(4,3), cell(4,4) }
-            }*/;
+            List<List<object>> data = new List<List<object>>();
 
             object[] req = new object[inputData.Last().GetUpperBound(0)];
 
@@ -71,21 +67,30 @@ namespace SimplexMethod
 
             NorthWest nw = new NorthWest(data, req, stocks);
             LowCost lc = new LowCost(data, req, stocks);
-            Vogel FliegtNachSud = new Vogel(data, req, stocks);
+            Vogel FliegtNachSüd = new Vogel(data, req, stocks);
+
+            methods.Clear();
+
+            methods.Add(nw);
+            methods.Add(lc);
+            methods.Add(FliegtNachSüd);
+
+            IRouteSolveMethod optimum = FliegtNachSüd;
+
+            foreach(IRouteSolveMethod m in methods)
+            {
+                var table = DrawSimplexTable(m);
+                this.SimplexMatrixes.Add(table);
+                if ((double)m.BasisResult < (double)optimum.BasisResult)
+                {
+                    optimum = m;
+                }
+            }
+            
 
 
-
-
-
-            //foreach(double[,] matrix in simplex.Steps)
-            //{
-            //    var table = DrawSimplexTable(matrix, 4, 4);
-            //    this.SimplexMatrixes.Add(table);
-            //}
-
-            //AnswerLabel.Text = "Ответ: ";
-            //AnswerLabel.Text += simplex.Result.ToString();
-            //OptimumPlanLabel.Text = simplex.Plan;
+            AnswerLabel.Text = "Ответ: ";
+            AnswerLabel.Text += optimum.BasisResult.ToString();            
             setVisibility(true);
         }
 
@@ -116,26 +121,25 @@ namespace SimplexMethod
             return table;
         }
 
-        private DataGridView DrawSimplexTable<T>(T[,] data, int freeCount, int basisCount)
+        private DataGridView DrawSimplexTable(IRouteSolveMethod solution)
         {
             DataGridView table = new DataGridView();
 
-            table.Columns.Add("b", "Res");
+            table.Columns.Add("a", "Поставщики");
 
-            for (int i = 0; i < basisCount + freeCount; i++) // z row, basis variables
+            for (int i = 0; i < solution.Rows[0].CellCount; i++)
             {
-                table.Columns.Add("x" + (i + 1).ToString(), "x" + (i + 1).ToString());
-            }
+                table.Columns.Add("B" + (i + 1).ToString(), "B" + (i + 1).ToString());
+            }            
 
-            table.Columns.Add("Sum", "Сумма");
-
-            for (int i = 0; i < basisCount + 2; i++) // z row, basis variables
+            for (int i = 0; i < solution.Rows.Length; i++) 
             {
-                object[] row = new object[basisCount + freeCount + 2];
-                for(int j = 0; j < basisCount + freeCount + 2; j++)
+                object[] row = new object[solution.Rows[i].Cells.Length + 1];
+                row[0] = "A" + (i + 1).ToString();
+                for(int j = 0; j < solution.Rows[i].Cells.Length; j++)
                 {
-                    row[j] = data[i, j];
-                }
+                    row[j + 1] = solution.Rows[i].Cells[j].Value;
+                }                
                 table.Rows.Add(row);
             }
             
@@ -176,7 +180,7 @@ namespace SimplexMethod
             source.Dock = DockStyle.Fill;
             
             source.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            LabelState.Text = (index + 1).ToString();
+            LabelState.Text = methods[state].Title;
         }
 
         private void ProcessDataMode_Click(object sender, EventArgs e)
@@ -219,7 +223,6 @@ namespace SimplexMethod
             nextMatrix.Visible = !state;
             prevMatrix.Visible = !state;
             LabelState.Visible = !state;
-            OptimumPlanLabel.Visible = state;
             AnswerLabel.Visible = state;
         }
 

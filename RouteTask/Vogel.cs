@@ -8,7 +8,13 @@ namespace SimplexMethod
 {
     public class Vogel : AbstractSolver
     {
-        private double max = 0;
+        public override string Title
+        {
+            get
+            {
+                return "Метод Фогеля";
+            }
+        }
 
         public Vogel(List<List<object>> values, object[] requests, object[] stocks) : base(values, requests, stocks)
         {
