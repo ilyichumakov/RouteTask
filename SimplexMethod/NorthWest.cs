@@ -8,8 +8,6 @@ namespace SimplexMethod
 {
     public class NorthWest : AbstractSolver
     {
-        private DeliveryRow[] _rows;      
-
         public NorthWest(List<List<object>> values, object[] requests, object[] stocks) : base(values, requests, stocks)
         {
 
@@ -27,18 +25,18 @@ namespace SimplexMethod
 
                 while (target > 0) 
                 {
-                    if((double)_rows[row].Stock >= target)
+                    if(_rows[row].Stock >= target)
                     {
                         _rows[row].Cells[col].Value = target;
                         _rows[row].Cells[col].Visited = true;
-                        _rows[row].Stock = (double)_rows[row].Stock - target;
+                        _rows[row].Stock = _rows[row].Stock - target;
                         target = 0;
                     }
                     else
                     {
-                        _rows[row].Cells[col].Value = (double)_rows[row].Cells[col].Value + (double)_rows[row].Stock;
+                        _rows[row].Cells[col].Value = _rows[row].Cells[col].Value + _rows[row].Stock;
                         _rows[row].Cells[col].Visited = true;
-                        target -= (double)_rows[row].Stock;
+                        target -= _rows[row].Stock;
                         _rows[row].Stock = 0;
                         row++;
                     }                    

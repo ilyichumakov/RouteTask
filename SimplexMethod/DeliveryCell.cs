@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SimplexMethod
 {
-    public class DeliveryCell<T>
+    public class DeliveryCell
     {
         /// <summary>
         /// Представляет ячейку в транспортной таблице 
@@ -22,22 +22,21 @@ namespace SimplexMethod
             set;
         }
 
-        public T Price
+        public double Price
         {
             get;            
         }
 
-        public T Value
+        public double Value
         {
             get;
             set;
         }
 
-        public DeliveryCell(T val)
+        public DeliveryCell(double val)
         {
             Price = val;
-            Visited = false;
-            
+            Visited = false;            
         }
     }
 }

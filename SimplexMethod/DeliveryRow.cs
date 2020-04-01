@@ -13,9 +13,9 @@ namespace SimplexMethod
         /// Представляет строку в транспортной таблице 
         /// <summary>
         
-        private DeliveryCell<object>[] _cells;
+        private DeliveryCell[] _cells;
 
-        public DeliveryCell<object>[] Cells
+        public DeliveryCell[] Cells
         {
             get
             {
@@ -31,7 +31,7 @@ namespace SimplexMethod
             }
         }
 
-        public object Stock
+        public double Stock
         {
             /// <summary>
             /// Остаток на складе 
@@ -43,19 +43,19 @@ namespace SimplexMethod
 
         public DeliveryRow(IEnumerable<object> values)
         {
-            List<object> temp = new List<object>();
+            List<double> temp = new List<double>();
 
             foreach(object v in values)
             {
-                temp.Add(v);
+                temp.Add((double)v);
             }
             int capacity = temp.Count;
 
-            _cells = new DeliveryCell<object>[capacity];
+            _cells = new DeliveryCell[capacity];
 
             for(int i = 0; i < capacity; i++)
             {
-                _cells[i] = new DeliveryCell<object>(temp[i]);
+                _cells[i] = new DeliveryCell(temp[i]);
                 _cells[i].Value = 0.0;
             }
         }

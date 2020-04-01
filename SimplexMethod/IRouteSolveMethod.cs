@@ -19,7 +19,7 @@ namespace SimplexMethod
             get;
         }
 
-        object[] Clients
+        double[] Clients
         {
             get;
             set;

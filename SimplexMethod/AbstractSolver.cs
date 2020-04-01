@@ -8,9 +8,9 @@ namespace SimplexMethod
 {
     public abstract class AbstractSolver : IRouteSolveMethod
     {
-        private DeliveryRow[] _rows;
+        protected DeliveryRow[] _rows;
 
-        public object[] Clients
+        public double[] Clients
         {
             /// <summary>
             /// Запросы от клиентов 
@@ -32,14 +32,14 @@ namespace SimplexMethod
         {
             List<object> temp = new List<object>();
             _rows = new DeliveryRow[values.Count];
-            Clients = new object[requests.GetUpperBound(0) + 1];
+            Clients = new double[requests.GetUpperBound(0) + 1];
 
             int i = 0;
 
             foreach (List<object> row in values)
             {
                 _rows[i] = new DeliveryRow(row);
-                _rows[i].Stock = stocks[i];                
+                _rows[i].Stock = (double)stocks[i];                
                 i++;
             }
 
@@ -47,7 +47,7 @@ namespace SimplexMethod
 
             foreach (object r in requests)
             {
-                Clients[i] = r;
+                Clients[i] = (double)r;
                 i++;
             }
 
@@ -66,10 +66,10 @@ namespace SimplexMethod
                 {
                     for (int col = 0; col < _rows[row].CellCount; col++)
                     {
-                        if ((double)_rows[row].Cells[col].Value == 0.0)
+                        if (_rows[row].Cells[col].Value == 0.0)
                             continue;
                         else
-                            res += (double)_rows[row].Cells[col].Value * (double)_rows[row].Cells[col].Price;
+                            res += _rows[row].Cells[col].Value * _rows[row].Cells[col].Price;
                     }
                 }
 
