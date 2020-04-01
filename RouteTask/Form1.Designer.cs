@@ -253,7 +253,7 @@
             this.MinimumSize = new System.Drawing.Size(768, 480);
             this.Name = "Form1";
             this.ShowIcon = false;
-            this.Text = "Simplex Method";
+            this.Text = "Транспортная Задача";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataTable)).EndInit();
             this.menuStrip1.ResumeLayout(false);
